@@ -117,7 +117,7 @@ graph LR
 - [x] 1.2 Algorithm Thinking & Big-O Notation
 - [x] 1.3 How the Internet Actually Works
 - [x] 1.4 Database Fundamentals
-- [ ] 1.5 Python Deep Dive
+- [x] 1.5 Python Deep Dive
 
 ### Phase 2: System Design
 - [ ] 2.1 – 2.10 (10 topics)
