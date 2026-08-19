@@ -1,5 +1,7 @@
 # 📘 Topic 1.2 — Algorithm Thinking & Big-O Notation
 
+> **Code Implementation**: See [code.py](./code.py) for runnable Python implementation
+
 > **Why this matters**: Two developers can solve the same problem — one's code runs in **1 second**, the other takes **3 hours**. The difference? They chose different algorithms. Big-O is the language that lets you **predict** which one is faster *before you even run the code*.
 
 ---
@@ -76,31 +78,31 @@ graph LR
 ### 🎯 Analogy
 > Opening a **book to page 50**. Whether the book has 100 pages or 10,000 pages, flipping to page 50 takes the same time.
 
-### 🐍 Python Examples
+### 💻 Pseudo Code Examples
 
-```python
-# All O(1) — instant regardless of size
+```text
+// All O(1) — instant regardless of size
 
 my_list = [10, 20, 30, 40, 50]
-my_dict = {"name": "Alice", "age": 28}
+my_dictionary = {"name": "Alice", "age": 28}
 
-# ✅ Access by index
-first = my_list[0]              # O(1)
+// ✅ Access by index
+first = my_list[0]              // O(1)
 
-# ✅ Dict lookup
-name = my_dict["name"]          # O(1)
+// ✅ Dictionary lookup
+name = my_dictionary["name"]    // O(1)
 
-# ✅ Append to list
-my_list.append(60)              # O(1)
+// ✅ Append to list
+my_list.APPEND(60)              // O(1)
 
-# ✅ Check dict key
-exists = "name" in my_dict      # O(1)
+// ✅ Check dictionary key
+exists = HAS_KEY(my_dictionary, "name") // O(1)
 
-# ✅ Get length
-size = len(my_list)             # O(1)
+// ✅ Get length
+size = LENGTH(my_list)          // O(1)
 
-# ✅ Push/pop from stack
-my_list.pop()                   # O(1)
+// ✅ Push/pop from stack
+my_list.POP()                   // O(1)
 ```
 
 ---
@@ -133,33 +135,29 @@ graph TD
 > The **dictionary word game**: "I'm thinking of a word. Is it before or after 'M'?"
 > Each guess eliminates half the dictionary. You find any word in ~17 guesses out of 100,000 words!
 
-### 🐍 Python — Binary Search
+### 💻 Pseudo Code — Binary Search
 
-```python
-def binary_search(sorted_list, target):
-    """Find target in a sorted list. Returns index or -1."""
-    left, right = 0, len(sorted_list) - 1
+```text
+FUNCTION binary_search(sorted_list, target):
+    // Find target in a sorted list. Returns index or -1.
+    left = 0
+    right = LENGTH(sorted_list) - 1
     steps = 0
 
-    while left <= right:
-        steps += 1
-        mid = (left + right) // 2
+    WHILE left <= right:
+        steps = steps + 1
+        mid = (left + right) / 2
 
-        if sorted_list[mid] == target:
-            print(f"  Found {target} at index {mid} in {steps} steps!")
-            return mid
-        elif sorted_list[mid] < target:
-            left = mid + 1     # Target is in right half
-        else:
-            right = mid - 1    # Target is in left half
+        IF sorted_list[mid] == target:
+            PRINT "Found target at index", mid, "in", steps, "steps!"
+            RETURN mid
+        ELSE IF sorted_list[mid] < target:
+            left = mid + 1     // Target is in right half
+        ELSE:
+            right = mid - 1    // Target is in left half
 
-    print(f"  {target} not found after {steps} steps")
-    return -1
-
-
-# Test it!
-numbers = list(range(0, 1000, 2))  # [0, 2, 4, 6, ..., 998]
-binary_search(numbers, 678)  # Found in ~9 steps out of 500 items!
+    PRINT "Target not found after", steps, "steps"
+    RETURN -1
 ```
 
 ---
@@ -184,37 +182,34 @@ graph LR
 ### 🎯 Analogy
 > **Reading a guest list** to find if your name is on it. You start from the top and read each name. 100 guests? Check up to 100 names.
 
-### 🐍 Python Examples
+### 💻 Pseudo Code Examples
 
-```python
-# All O(n) — touch each element once
+```text
+// All O(n) — touch each element once
 
 numbers = [4, 2, 7, 1, 9, 3, 8, 5, 6]
 
-# ✅ Linear search
-def find_number(nums, target):
-    for i, num in enumerate(nums):
-        if num == target:
-            return i
-    return -1
+// ✅ Linear search
+FUNCTION find_number(nums, target):
+    FOR i = 0 TO LENGTH(nums) - 1:
+        IF nums[i] == target:
+            RETURN i
+    RETURN -1
 
-# ✅ Find maximum
-def find_max(nums):
+// ✅ Find maximum
+FUNCTION find_max(nums):
     max_val = nums[0]
-    for num in nums:           # Visit each element once
-        if num > max_val:
+    FOR EACH num IN nums:       // Visit each element once
+        IF num > max_val:
             max_val = num
-    return max_val
+    RETURN max_val
 
-# ✅ Sum all elements
-total = sum(numbers)           # O(n) — adds each number once
-
-# ✅ Filter
-evens = [x for x in numbers if x % 2 == 0]  # O(n)
-
-# ⚠️ "in" on a list is O(n)!
-if 7 in numbers:               # Scans up to all elements
-    print("Found 7!")
+// ✅ Sum all elements
+FUNCTION sum_all(nums):
+    total = 0
+    FOR EACH num IN nums:
+        total = total + num
+    RETURN total                  // O(n) — adds each number once
 ```
 
 ---
@@ -266,16 +261,15 @@ graph TD
 ### 🎯 Analogy
 > **Sorting exams**: Split the pile in half, split again, sort tiny piles, then merge them back in order. Much faster than comparing every paper to every other paper!
 
-### 🐍 Python
+### 💻 Pseudo Code
 
-```python
-# Python's built-in sort is Timsort — O(n log n)
+```text
+// Most efficient modern sorting algorithms are O(n log n)
 numbers = [38, 27, 43, 3, 9, 82, 10]
 
-sorted_nums = sorted(numbers)           # Returns new sorted list
-numbers.sort()                           # Sorts in-place
+sorted_nums = SORT(numbers)           // Returns new sorted list
 
-# Both are O(n log n) — very efficient!
+// Both are O(n log n) — very efficient!
 ```
 
 ---
@@ -313,49 +307,49 @@ graph TD
 ### 🎯 Analogy
 > **Handshake problem**: At a party of 100 people, if everyone shakes hands with everyone else, that's ~5,000 handshakes. At 1,000 people, it's ~500,000!
 
-### 🐍 Python — Spot the O(n²) Traps!
+### 💻 Pseudo Code — Spot the O(n²) Traps!
 
-```python
-# ❌ TRAP 1: Nested loops
-def has_duplicate_slow(nums):
-    """O(n²) — compares every pair"""
-    for i in range(len(nums)):
-        for j in range(i + 1, len(nums)):
-            if nums[i] == nums[j]:
-                return True
-    return False
-
-
-# ✅ FIX: Use a set!
-def has_duplicate_fast(nums):
-    """O(n) — checks each element once"""
-    seen = set()
-    for num in nums:
-        if num in seen:        # O(1) lookup in set!
-            return True
-        seen.add(num)
-    return False
+```text
+// ❌ TRAP 1: Nested loops
+FUNCTION has_duplicate_slow(nums):
+    // O(n²) — compares every pair
+    FOR i = 0 TO LENGTH(nums) - 1:
+        FOR j = i + 1 TO LENGTH(nums) - 1:
+            IF nums[i] == nums[j]:
+                RETURN True
+    RETURN False
 
 
-# ❌ TRAP 2: "in" on a list inside a loop
-def common_elements_slow(list_a, list_b):
-    """O(n²) — 'in' on list is O(n), and it's inside a loop"""
-    result = []
-    for item in list_a:
-        if item in list_b:     # O(n) for each check!
-            result.append(item)
-    return result
+// ✅ FIX: Use a Hash Set!
+FUNCTION has_duplicate_fast(nums):
+    // O(n) — checks each element once
+    seen = NEW HASH_SET()
+    FOR EACH num IN nums:
+        IF seen.CONTAINS(num): // O(1) lookup in set!
+            RETURN True
+        seen.ADD(num)
+    RETURN False
 
 
-# ✅ FIX: Convert to set first
-def common_elements_fast(list_a, list_b):
-    """O(n) — 'in' on set is O(1)"""
-    set_b = set(list_b)        # O(n) once
-    result = []
-    for item in list_a:
-        if item in set_b:      # O(1) for each check!
-            result.append(item)
-    return result
+// ❌ TRAP 2: Linear search inside a loop
+FUNCTION common_elements_slow(list_a, list_b):
+    // O(n²) — search in list is O(n), and it's inside a loop
+    result = NEW LIST()
+    FOR EACH item IN list_a:
+        IF list_b.CONTAINS(item): // O(n) for each check!
+            result.APPEND(item)
+    RETURN result
+
+
+// ✅ FIX: Convert to set first
+FUNCTION common_elements_fast(list_a, list_b):
+    // O(n) — lookup in set is O(1)
+    set_b = NEW HASH_SET(list_b)  // O(n) once
+    result = NEW LIST()
+    FOR EACH item IN list_a:
+        IF set_b.CONTAINS(item):  // O(1) for each check!
+            result.APPEND(item)
+    RETURN result
 ```
 
 ---
@@ -394,13 +388,13 @@ graph LR
 
 ### Rule 3: Different Inputs = Different Variables
 
-```python
-# This is O(a * b), NOT O(n²)!
-def print_pairs(list_a, list_b):
-    for a in list_a:        # O(a)
-        for b in list_b:    # O(b)
-            print(a, b)
-# Only O(n²) if list_a and list_b are the same size
+```text
+// This is O(a * b), NOT O(n²)!
+FUNCTION print_pairs(list_a, list_b):
+    FOR EACH a IN list_a:        // O(a)
+        FOR EACH b IN list_b:    // O(b)
+            PRINT a, b
+// Only O(n²) if list_a and list_b are the same size
 ```
 
 ### 🧩 Quick Analysis Cheat Sheet
@@ -438,23 +432,24 @@ graph LR
     style R fill:#e74c3c,stroke:#333,color:#fff
 ```
 
-```python
-def two_sum_sorted(nums, target):
-    """Find two numbers that add to target in a SORTED list. O(n)"""
-    left, right = 0, len(nums) - 1
+```text
+FUNCTION two_sum_sorted(nums, target):
+    // Find two numbers that add to target in a SORTED list. O(n)
+    left = 0
+    right = LENGTH(nums) - 1
 
-    while left < right:
+    WHILE left < right:
         current_sum = nums[left] + nums[right]
-        if current_sum == target:
-            return [left, right]
-        elif current_sum < target:
-            left += 1          # Need bigger sum → move left pointer right
-        else:
-            right -= 1         # Need smaller sum → move right pointer left
+        IF current_sum == target:
+            RETURN [left, right]
+        ELSE IF current_sum < target:
+            left = left + 1    // Need bigger sum → move left pointer right
+        ELSE:
+            right = right - 1  // Need smaller sum → move right pointer left
 
-    return []
+    RETURN []
 
-# [1, 3, 5, 7, 9], target=12 → [1, 4] because 3 + 9 = 12
+// [1, 3, 5, 7, 9], target=12 → [1, 4] because 3 + 9 = 12
 ```
 
 ### Pattern 2: Sliding Window
@@ -472,38 +467,40 @@ graph LR
     style W3 fill:#2ecc71,stroke:#333,color:#fff,stroke-width:3px
 ```
 
-```python
-def max_sum_subarray(nums, k):
-    """Find max sum of any k consecutive elements. O(n)"""
-    # Calculate first window
-    window_sum = sum(nums[:k])
+```text
+FUNCTION max_sum_subarray(nums, k):
+    // Find max sum of any k consecutive elements. O(n)
+    // Calculate first window
+    window_sum = 0
+    FOR i = 0 TO k - 1:
+        window_sum = window_sum + nums[i]
     max_sum = window_sum
 
-    # Slide the window: add new element, remove old one
-    for i in range(k, len(nums)):
-        window_sum += nums[i] - nums[i - k]    # Slide!
-        max_sum = max(max_sum, window_sum)
+    // Slide the window: add new element, remove old one
+    FOR i = k TO LENGTH(nums) - 1:
+        window_sum = window_sum + nums[i] - nums[i - k]    // Slide!
+        max_sum = MAX(max_sum, window_sum)
 
-    return max_sum
+    RETURN max_sum
 
-# [2, 1, 5, 1, 3, 2], k=3 → 9 (subarray [5, 1, 3])
+// [2, 1, 5, 1, 3, 2], k=3 → 9 (subarray [5, 1, 3])
 ```
 
 ### Pattern 3: Frequency Counter
 
-```python
-from collections import Counter
+```text
+FUNCTION are_anagrams(word1, word2):
+    // Check if two words are anagrams. O(n)
+    count_map1 = GET_CHARACTER_COUNTS(word1)
+    count_map2 = GET_CHARACTER_COUNTS(word2)
+    RETURN count_map1 == count_map2
 
-def are_anagrams(word1, word2):
-    """Check if two words are anagrams. O(n)"""
-    return Counter(word1) == Counter(word2)
+// "listen" and "silent" → True
+// "hello" and "world" → False
 
-# "listen" and "silent" → True
-# "hello" and "world" → False
-
-# Counter("listen") → {'l':1, 'i':1, 's':1, 't':1, 'e':1, 'n':1}
-# Counter("silent") → {'s':1, 'i':1, 'l':1, 'e':1, 'n':1, 't':1}
-# Same counts = anagram!
+// GET_CHARACTER_COUNTS("listen") → {'l':1, 'i':1, 's':1, 't':1, 'e':1, 'n':1}
+// GET_CHARACTER_COUNTS("silent") → {'s':1, 'i':1, 'l':1, 'e':1, 'n':1, 't':1}
+// Same counts = anagram!
 ```
 
 ---
@@ -520,17 +517,20 @@ graph TD
     style B fill:#2ecc71,stroke:#333,color:#fff
 ```
 
-```python
-# O(1) space — uses no extra memory proportional to input
-def find_max(nums):
-    max_val = nums[0]         # Just one variable, regardless of input size
-    for num in nums:
-        max_val = max(max_val, num)
-    return max_val
+```text
+// O(1) space — uses no extra memory proportional to input
+FUNCTION find_max(nums):
+    max_val = nums[0]         // Just one variable, regardless of input size
+    FOR EACH num IN nums:
+        max_val = MAX(max_val, num)
+    RETURN max_val
 
-# O(n) space — creates a new collection proportional to input
-def remove_duplicates(nums):
-    return list(set(nums))    # The set can be as large as nums
+// O(n) space — creates a new collection proportional to input
+FUNCTION remove_duplicates(nums):
+    unique_set = NEW HASH_SET()
+    FOR EACH num IN nums:
+        unique_set.ADD(num)
+    RETURN unique_set.TO_LIST() // The list can be as large as nums
 ```
 
 ---
@@ -553,57 +553,57 @@ def remove_duplicates(nums):
 
 ### Exercise 1: What's the Big-O? (Analyze These)
 
-```python
-# a) What's the Big-O?
-def mystery_a(n):
-    for i in range(n):
-        print(i)
+```text
+// a) What's the Big-O?
+FUNCTION mystery_a(n):
+    FOR i = 0 TO n - 1:
+        PRINT i
 
-# b) What's the Big-O?
-def mystery_b(n):
-    for i in range(n):
-        for j in range(n):
-            print(i, j)
+// b) What's the Big-O?
+FUNCTION mystery_b(n):
+    FOR i = 0 TO n - 1:
+        FOR j = 0 TO n - 1:
+            PRINT i, j
 
-# c) What's the Big-O?
-def mystery_c(n):
+// c) What's the Big-O?
+FUNCTION mystery_c(n):
     i = n
-    while i > 0:
-        print(i)
-        i = i // 2
+    WHILE i > 0:
+        PRINT i
+        i = i / 2
 
-# d) What's the Big-O?
-def mystery_d(nums):
-    nums.sort()                  # ?
-    return nums[0]               # ?
+// d) What's the Big-O?
+FUNCTION mystery_d(nums):
+    SORT(nums)                   // ?
+    RETURN nums[0]               // ?
 
-# e) What's the Big-O?
-def mystery_e(nums):
-    seen = set()
-    for num in nums:             # ?
-        if num in seen:          # ?
-            return True
-        seen.add(num)
-    return False
+// e) What's the Big-O?
+FUNCTION mystery_e(nums):
+    seen = NEW HASH_SET()
+    FOR EACH num IN nums:        // ?
+        IF seen.CONTAINS(num):   // ?
+            RETURN True
+        seen.ADD(num)
+    RETURN False
 ```
 
 ### Exercise 2: Optimize This! (Turn O(n²) → O(n))
 
-```python
-# This is O(n²). Can you make it O(n)?
-def find_pair_with_sum(nums, target):
-    for i in range(len(nums)):
-        for j in range(i + 1, len(nums)):
-            if nums[i] + nums[j] == target:
-                return [i, j]
-    return []
+```text
+// This is O(n²). Can you make it O(n)?
+FUNCTION find_pair_with_sum(nums, target):
+    FOR i = 0 TO LENGTH(nums) - 1:
+        FOR j = i + 1 TO LENGTH(nums) - 1:
+            IF nums[i] + nums[j] == target:
+                RETURN [i, j]
+    RETURN []
 ```
 
 ### Exercise 3: Binary Search Practice
 
-```python
-# Implement binary search to find the first number >= target
-# Input: [1, 3, 5, 7, 9, 11], target=6 → Output: index 3 (value 7)
+```text
+// Implement binary search to find the first number >= target
+// Input: [1, 3, 5, 7, 9, 11], target=6 → Output: index 3 (value 7)
 ```
 
 ---

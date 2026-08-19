@@ -2,6 +2,8 @@
 
 > **Why this matters**: Data structures are the **containers** that hold your data. Choosing the wrong one is like using a suitcase to carry water — it technically holds stuff, but it's the wrong tool. The right data structure makes your code **10x-100x faster**.
 
+> **Code Implementation**: See [code.py](./code.py) for runnable Python implementation
+
 ---
 
 ## 🧠 The Big Picture — What Are Data Structures?
@@ -59,28 +61,31 @@ graph LR
     style I3 fill:#4d96ff,stroke:#333,color:#fff
 ```
 
-### 🐍 Python Code
+### Pseudo Code
 
-```python
-# ✅ Creating a list
+```
+// Creating a list
 fruits = ["apple", "banana", "cherry", "date"]
 
-# ✅ Access by index — INSTANT (O(1))
-print(fruits[2])  # "cherry" — goes directly to position 2
+// Access by index — INSTANT O(1)
+item = fruits[2]                    // "cherry" — jumps directly to position 2
 
-# ✅ Append at end — FAST (O(1))
-fruits.append("elderberry")
+// Append at end — FAST O(1)
+APPEND(fruits, "elderberry")
 
-# ⚠️ Insert in middle — SLOW (O(n)) — shifts everything!
-fruits.insert(1, "blueberry")
-# Now: ["apple", "blueberry", "banana", "cherry", "date", "elderberry"]
+// Insert in middle — SLOW O(n) — shifts everything after!
+INSERT(fruits, position=1, value="blueberry")
+// Now: ["apple", "blueberry", "banana", "cherry", "date", "elderberry"]
 
-# ⚠️ Search by value — SLOW (O(n)) — checks one by one
-"cherry" in fruits  # True, but had to scan through the list
+// Search by value — SLOW O(n) — checks one by one
+found = SEARCH(fruits, "cherry")    // True, but scanned through the list
 
-# ✅ List comprehension — Pythonic way to transform
+// Transform each element
 prices = [10, 20, 30, 40]
-discounted = [p * 0.9 for p in prices]  # [9.0, 18.0, 27.0, 36.0]
+discounted = []
+FOR EACH price IN prices:
+    APPEND(discounted, price * 0.9)
+// discounted = [9.0, 18.0, 27.0, 36.0]
 ```
 
 ### ✅ Use Lists When:
@@ -90,7 +95,7 @@ discounted = [p * 0.9 for p in prices]  # [9.0, 18.0, 27.0, 36.0]
 - Example: list of recent orders, playlist of songs
 
 ### ❌ Don't Use Lists When:
-- You need to **search** frequently (use a dict/set instead)
+- You need to **search** frequently (use a hash map/set instead)
 - You **insert/delete** in the middle often (use a linked list)
 
 ---
@@ -122,50 +127,53 @@ graph TD
     style B1 fill:#6bcb77,stroke:#333,color:#fff
 ```
 
-> **The hash function** is the magic. It converts any key into a number (bucket position) in constant time. That's why lookup is **O(1)** — you never scan through everything!
+> The **hash function** is the magic. It converts any key into a number (bucket position) in constant time. That's why lookup is **O(1)** — you never scan through everything!
 
-### 🐍 Python Code
+### Pseudo Code
 
-```python
-# ✅ Creating a dictionary
+```
+// Creating a hash map
 user = {
     "name": "Alice",
     "age": 28,
     "email": "alice@example.com"
 }
 
-# ✅ Access by key — INSTANT (O(1))
-print(user["name"])  # "Alice"
+// Access by key — INSTANT O(1)
+name = user["name"]                    // "Alice"
 
-# ✅ Safe access with .get()
-print(user.get("phone", "N/A"))  # "N/A" — no crash!
+// Safe access with default value
+phone = GET(user, "phone", default="N/A")  // "N/A" — no crash!
 
-# ✅ Add/Update — INSTANT (O(1))
+// Add/Update — INSTANT O(1)
 user["phone"] = "+1234567890"
 
-# ✅ Check if key exists — INSTANT (O(1))
-if "email" in user:
-    print("Has email!")
+// Check if key exists — INSTANT O(1)
+IF "email" IN user:
+    PRINT("Has email!")
 
-# ✅ Loop through items
-for key, value in user.items():
-    print(f"{key}: {value}")
+// Loop through items
+FOR EACH key, value IN user:
+    PRINT(key + ": " + value)
 
-# 🔥 Real-world example: Counting word frequency
+// 🔥 Real-world example: Counting word frequency
 text = "the cat sat on the mat the cat"
 word_count = {}
-for word in text.split():
-    word_count[word] = word_count.get(word, 0) + 1
-# Result: {'the': 3, 'cat': 2, 'sat': 1, 'on': 1, 'mat': 1}
+FOR EACH word IN SPLIT(text, " "):
+    IF word IN word_count:
+        word_count[word] = word_count[word] + 1
+    ELSE:
+        word_count[word] = 1
+// Result: {"the": 3, "cat": 2, "sat": 1, "on": 1, "mat": 1}
 ```
 
-### ✅ Use Dicts When:
+### ✅ Use Hash Maps When:
 - You need **instant lookup** by a key
 - You're mapping relationships (user_id → user_data)
 - You're **counting** or **grouping** things
 - Example: caching, configuration, JSON-like data
 
-### ❌ Don't Use Dicts When:
+### ❌ Don't Use Hash Maps When:
 - You need **ordered ranking** (use a sorted list or heap)
 - Keys are sequential integers (just use a list)
 
@@ -197,43 +205,41 @@ graph TD
     style POP fill:#e67e22,stroke:#333,color:#fff
 ```
 
-### 🐍 Python Code
+### Pseudo Code
 
-```python
-# In Python, a list works perfectly as a stack!
-stack = []
+```
+stack = EMPTY_STACK
 
-# Push (add to top)
-stack.append("page_1")
-stack.append("page_2")
-stack.append("page_3")
-# Stack: ["page_1", "page_2", "page_3"]  ← top
+// Push (add to top)
+PUSH(stack, "page_1")
+PUSH(stack, "page_2")
+PUSH(stack, "page_3")
+// Stack: ["page_1", "page_2", "page_3"]  ← top
 
-# Pop (remove from top)
-top = stack.pop()  # "page_3"
-# Stack: ["page_1", "page_2"]
+// Pop (remove from top)
+top = POP(stack)             // "page_3"
+// Stack: ["page_1", "page_2"]
 
-# Peek (look at top without removing)
-top = stack[-1]  # "page_2"
+// Peek (look at top without removing)
+top = PEEK(stack)            // "page_2"
 
-# 🔥 Real-world example: Undo/Redo system
-class TextEditor:
-    def __init__(self):
-        self.text = ""
-        self.undo_stack = []
+// 🔥 Real-world example: Undo/Redo system
+CLASS TextEditor:
+    text = ""
+    undo_stack = EMPTY_STACK
 
-    def type(self, new_text):
-        self.undo_stack.append(self.text)  # Save current state
-        self.text += new_text
+    FUNCTION type(new_text):
+        PUSH(undo_stack, text)       // Save current state
+        text = text + new_text
 
-    def undo(self):
-        if self.undo_stack:
-            self.text = self.undo_stack.pop()  # Restore previous state
+    FUNCTION undo():
+        IF NOT IS_EMPTY(undo_stack):
+            text = POP(undo_stack)   // Restore previous state
 
-editor = TextEditor()
-editor.type("Hello ")     # text: "Hello "
-editor.type("World!")      # text: "Hello World!"
-editor.undo()              # text: "Hello "  ← magic!
+editor = NEW TextEditor()
+editor.type("Hello ")          // text: "Hello "
+editor.type("World!")          // text: "Hello World!"
+editor.undo()                  // text: "Hello "  ← magic!
 ```
 
 ### ✅ Use Stacks When:
@@ -271,33 +277,33 @@ graph LR
     style C fill:#4d96ff,stroke:#333,color:#fff
 ```
 
-### 🐍 Python Code
+### Pseudo Code
 
-```python
-from collections import deque  # Double-ended queue — efficient!
+```
+queue = EMPTY_QUEUE
 
-# Create a queue
-queue = deque()
+// Enqueue (add to back)
+ENQUEUE(queue, "customer_1")
+ENQUEUE(queue, "customer_2")
+ENQUEUE(queue, "customer_3")
 
-# Enqueue (add to back)
-queue.append("customer_1")
-queue.append("customer_2")
-queue.append("customer_3")
+// Dequeue (remove from front) — O(1)!
+first = DEQUEUE(queue)       // "customer_1"
 
-# Dequeue (remove from front) — O(1)!
-first = queue.popleft()  # "customer_1"
-# ⚠️ Don't use list.pop(0) — that's O(n)! deque.popleft() is O(1)
+// ⚠️ Important: use a proper queue structure, not a list
+// Removing from the front of a list is O(n) — it shifts everything!
+// A proper queue (deque/linked list) does it in O(1)
 
-# 🔥 Real-world example: Task processing queue
-task_queue = deque()
-task_queue.append({"type": "send_email", "to": "alice@mail.com"})
-task_queue.append({"type": "resize_image", "file": "photo.jpg"})
-task_queue.append({"type": "send_email", "to": "bob@mail.com"})
+// 🔥 Real-world example: Task processing queue
+task_queue = EMPTY_QUEUE
+ENQUEUE(task_queue, {type: "send_email", to: "alice@mail.com"})
+ENQUEUE(task_queue, {type: "resize_image", file: "photo.jpg"})
+ENQUEUE(task_queue, {type: "send_email", to: "bob@mail.com"})
 
-while task_queue:
-    task = task_queue.popleft()
-    print(f"Processing: {task['type']}")
-# Processes in order: send_email → resize_image → send_email
+WHILE NOT IS_EMPTY(task_queue):
+    task = DEQUEUE(task_queue)
+    PROCESS(task)
+// Processes in order: send_email → resize_image → send_email
 ```
 
 ### ✅ Use Queues When:
@@ -361,6 +367,20 @@ graph TD
 
 > Only visited **3 nodes** out of 8 to find 7. In a list, you'd check up to **all 8**!
 
+### Pseudo Code
+
+```
+FUNCTION bst_search(node, target):
+    IF node IS NULL:
+        RETURN "Not found"
+    IF target == node.value:
+        RETURN node
+    ELSE IF target < node.value:
+        RETURN bst_search(node.left, target)    // Go left (smaller side)
+    ELSE:
+        RETURN bst_search(node.right, target)   // Go right (bigger side)
+```
+
 ### ✅ Use Trees When:
 - **Hierarchical data** (file system, org chart, HTML DOM)
 - **Fast search** on sorted data (BST → O(log n))
@@ -394,25 +414,24 @@ graph TD
     style G fill:#f1c40f,stroke:#333,color:#333
 ```
 
-### 🐍 Python Code
+### Pseudo Code
 
-```python
-import heapq  # Python's built-in heap module (min-heap)
+```
+heap = EMPTY_MIN_HEAP
 
-# Create a heap
-tasks = []
-heapq.heappush(tasks, (3, "low priority task"))
-heapq.heappush(tasks, (1, "🔥 URGENT task"))
-heapq.heappush(tasks, (2, "medium priority task"))
+// Insert — O(log n) each
+HEAP_INSERT(heap, (priority=3, task="low priority task"))
+HEAP_INSERT(heap, (priority=1, task="🔥 URGENT task"))
+HEAP_INSERT(heap, (priority=2, task="medium priority task"))
 
-# Pop always gives the SMALLEST (highest priority)
-print(heapq.heappop(tasks))  # (1, "🔥 URGENT task")
-print(heapq.heappop(tasks))  # (2, "medium priority task")
-print(heapq.heappop(tasks))  # (3, "low priority task")
+// Extract always gives the SMALLEST (highest priority)
+HEAP_EXTRACT_MIN(heap)  // (1, "🔥 URGENT task")
+HEAP_EXTRACT_MIN(heap)  // (2, "medium priority task")
+HEAP_EXTRACT_MIN(heap)  // (3, "low priority task")
 
-# 🔥 Real-world example: Find the 3 cheapest products
+// 🔥 Real-world example: Find the 3 cheapest products
 products = [99, 15, 42, 7, 83, 23, 56, 3, 67]
-top_3_cheapest = heapq.nsmallest(3, products)  # [3, 7, 15]
+top_3_cheapest = HEAP_EXTRACT_N_SMALLEST(products, 3)  // [3, 7, 15]
 ```
 
 ### ✅ Use Heaps When:
@@ -423,12 +442,46 @@ top_3_cheapest = heapq.nsmallest(3, products)  # [3, 7, 15]
 
 ---
 
+## 7️⃣ Sets — The Unique Collection
+
+### 🎯 Real-World Analogy
+> A **guest list** at an exclusive party. Each name appears **only once**. Checking if someone is on the list is **instant** (like a hash map but with just keys, no values).
+
+### Pseudo Code
+
+```
+// Remove duplicates instantly
+numbers = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
+unique = TO_SET(numbers)           // {1, 2, 3, 4}
+
+// Lightning-fast membership check — O(1)
+allowed = SET("alice", "bob", "charlie")
+IS_IN(allowed, "alice")            // True  — O(1)
+IS_IN(allowed, "dave")             // False — O(1)
+
+// Set operations
+team_a = SET("alice", "bob", "charlie")
+team_b = SET("bob", "charlie", "dave")
+
+INTERSECTION(team_a, team_b)       // {"bob", "charlie"} — in BOTH
+UNION(team_a, team_b)              // {"alice", "bob", "charlie", "dave"} — in EITHER
+DIFFERENCE(team_a, team_b)         // {"alice"} — only in team_a
+```
+
+### ✅ Use Sets When:
+- You need **fast membership checking** — O(1) instead of O(n)
+- You need to **remove duplicates**
+- You need **set operations** (intersection, union, difference)
+- Example: tracking seen items, filtering unique visitors
+
+---
+
 ## 🧭 The Decision Flowchart — Which Data Structure Should I Use?
 
 ```mermaid
 graph TD
     START["🤔 What do I need?"] --> Q1{"Need key-value<br/>mapping?"}
-    Q1 -->|Yes| DICT["🗂️ Use Dictionary"]
+    Q1 -->|Yes| DICT["🗂️ Use Hash Map"]
     Q1 -->|No| Q2{"Need ordering<br/>or ranking?"}
 
     Q2 -->|Yes| Q3{"Need only<br/>min/max fast?"}
@@ -460,8 +513,8 @@ graph TD
 
 ## ⚡ Speed Comparison — Big-O at a Glance
 
-| Operation | List | Dict | Set | Stack | Queue (deque) | Heap |
-|-----------|------|------|-----|-------|---------------|------|
+| Operation | List | Hash Map | Set | Stack | Queue (Deque) | Heap |
+|-----------|------|----------|-----|-------|---------------|------|
 | **Access by index** | ✅ O(1) | ❌ N/A | ❌ N/A | ✅ O(1) top | ❌ N/A | ❌ N/A |
 | **Search by value** | 🐌 O(n) | ✅ O(1) | ✅ O(1) | 🐌 O(n) | 🐌 O(n) | 🐌 O(n) |
 | **Insert at end** | ✅ O(1) | ✅ O(1) | ✅ O(1) | ✅ O(1) | ✅ O(1) | ⚡ O(log n) |
@@ -469,28 +522,26 @@ graph TD
 | **Delete** | 🐌 O(n) | ✅ O(1) | ✅ O(1) | ✅ O(1) top | ✅ O(1) front | ⚡ O(log n) |
 | **Get min/max** | 🐌 O(n) | 🐌 O(n) | 🐌 O(n) | 🐌 O(n) | 🐌 O(n) | ✅ O(1) |
 
-> **Rule of thumb**: If you see yourself writing `if x in my_list` inside a loop, you probably need a **set** or **dict** instead. That single change can turn an O(n²) algorithm into O(n)!
+> **Rule of thumb**: If you see yourself doing `IF x IN my_list` inside a loop, you probably need a **set** or **hash map** instead. That single change can turn an O(n²) algorithm into O(n)!
 
 ---
 
 ## 🏋️ Practice Exercises
 
-Try these yourself, then ask me to review your solution!
-
 ### Exercise 1: Two Sum (Easy)
 > Given a list of numbers and a target, find two numbers that add up to the target. Return their indices.
 > **Hint**: Which data structure gives you O(1) lookup?
-```python
-# Input:  nums = [2, 7, 11, 15], target = 9
-# Output: [0, 1]  because nums[0] + nums[1] = 2 + 7 = 9
+```
+// Input:  nums = [2, 7, 11, 15], target = 9
+// Output: [0, 1]  because nums[0] + nums[1] = 2 + 7 = 9
 ```
 
 ### Exercise 2: Valid Parentheses (Easy)
 > Given a string of brackets `()[]{}`, check if they're properly matched.
 > **Hint**: Which data structure follows LIFO?
-```python
-# Input:  "({[]})"  → True
-# Input:  "({[}])"  → False
+```
+// Input:  "({[]})"  → True
+// Input:  "({[}])"  → False
 ```
 
 ### Exercise 3: Recent Calls Counter (Easy)
@@ -499,17 +550,17 @@ Try these yourself, then ask me to review your solution!
 
 ### Exercise 4: Top K Frequent Words (Medium)
 > Given a list of words, return the K most frequent ones.
-> **Hint**: Combine a dict with a heap.
+> **Hint**: Combine a hash map with a heap.
 
 ### Exercise 5: LRU Cache (Hard)
 > Design a cache that evicts the least recently used item when full.
-> **Hint**: Combine a dict with a doubly-linked list (or use `OrderedDict`).
+> **Hint**: Combine a hash map with a doubly-linked list.
 
 ---
 
 ## 🎤 Interview Corner
 
-> **Q: "When would you choose a dict over a list?"**
+> **Q: "When would you choose a hash map over a list?"**
 >
 > **Great answer**: "When I need O(1) lookups by a key instead of scanning through the entire collection. For example, if I'm building a user session store, I'd use `{session_id: user_data}` so I can instantly find any user's session without iterating."
 
@@ -525,7 +576,7 @@ Try these yourself, then ask me to review your solution!
 
 ## ✅ Key Takeaway
 
-> **The fastest way to speed up your code isn't clever algorithms — it's picking the right data structure.** A dict/set lookup is **1000x faster** than scanning a list when you have 1000 items.
+> **The fastest way to speed up your code isn't clever algorithms — it's picking the right data structure.** A hash map/set lookup is **1000x faster** than scanning a list when you have 1000 items.
 
 ---
 
