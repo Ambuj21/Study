@@ -17,44 +17,67 @@
 
 ### 📊 The Growth Chart — How Algorithms Scale
 
+Each row below shows how many **operations** an algorithm needs as the input grows. Watch how the bad ones explode!
+
 ```mermaid
-graph TD
-    subgraph "⏱️ Time vs Input Size — How Fast Does It Grow?"
-        direction LR
-        A["n = 10"] --> B["n = 100"] --> C["n = 1,000"] --> D["n = 1,000,000"]
-    end
-
-    subgraph "🟢 O(1) — Constant"
-        A1["1 step"] ~~~ B1["1 step"] ~~~ C1["1 step"] ~~~ D1["1 step"]
-    end
-
-    subgraph "🔵 O(log n) — Logarithmic"
-        A2["3 steps"] ~~~ B2["7 steps"] ~~~ C2["10 steps"] ~~~ D2["20 steps"]
-    end
-
-    subgraph "🟡 O(n) — Linear"
-        A3["10 steps"] ~~~ B3["100 steps"] ~~~ C3["1K steps"] ~~~ D3["1M steps"]
-    end
-
-    subgraph "🟠 O(n log n) — Linearithmic"
-        A4["33 steps"] ~~~ B4["664 steps"] ~~~ C4["10K steps"] ~~~ D4["20M steps"]
-    end
-
-    subgraph "🔴 O(n²) — Quadratic"
-        A5["100 steps"] ~~~ B5["10K steps"] ~~~ C5["1M steps"] ~~~ D5["1 TRILLION 💀"]
-    end
+graph LR
+    A1["🟢 O(1)<br/>Constant"] --> B1["n=10: 1"] --> C1["n=1K: 1"] --> D1["n=1M: 1 ✅"]
 
     style A1 fill:#2ecc71,stroke:#333,color:#fff
+    style B1 fill:#2ecc71,stroke:#333,color:#fff
+    style C1 fill:#2ecc71,stroke:#333,color:#fff
     style D1 fill:#2ecc71,stroke:#333,color:#fff
+```
+
+```mermaid
+graph LR
+    A2["🔵 O(log n)<br/>Logarithmic"] --> B2["n=10: 3"] --> C2["n=1K: 10"] --> D2["n=1M: 20 ✅"]
+
     style A2 fill:#3498db,stroke:#333,color:#fff
+    style B2 fill:#3498db,stroke:#333,color:#fff
+    style C2 fill:#3498db,stroke:#333,color:#fff
     style D2 fill:#3498db,stroke:#333,color:#fff
+```
+
+```mermaid
+graph LR
+    A3["🟡 O(n)<br/>Linear"] --> B3["n=10: 10"] --> C3["n=1K: 1,000"] --> D3["n=1M: 1,000,000 ⚡"]
+
     style A3 fill:#f1c40f,stroke:#333,color:#333
+    style B3 fill:#f1c40f,stroke:#333,color:#333
+    style C3 fill:#f1c40f,stroke:#333,color:#333
     style D3 fill:#f1c40f,stroke:#333,color:#333
+```
+
+```mermaid
+graph LR
+    A4["🟠 O(n log n)<br/>Linearithmic"] --> B4["n=10: 33"] --> C4["n=1K: 10,000"] --> D4["n=1M: 20,000,000 ⚠️"]
+
     style A4 fill:#e67e22,stroke:#333,color:#fff
+    style B4 fill:#e67e22,stroke:#333,color:#fff
+    style C4 fill:#e67e22,stroke:#333,color:#fff
     style D4 fill:#e67e22,stroke:#333,color:#fff
+```
+
+```mermaid
+graph LR
+    A5["🔴 O(n²)<br/>Quadratic"] --> B5["n=10: 100"] --> C5["n=1K: 1,000,000"] --> D5["n=1M: 1,000,000,000,000 💀"]
+
     style A5 fill:#e74c3c,stroke:#333,color:#fff
+    style B5 fill:#e74c3c,stroke:#333,color:#fff
+    style C5 fill:#e74c3c,stroke:#333,color:#fff
     style D5 fill:#e74c3c,stroke:#333,color:#fff
 ```
+
+### Summary Table
+
+| Big-O | Name | n = 10 | n = 1,000 | n = 1,000,000 | Verdict |
+|-------|------|--------|-----------|---------------|---------|
+| 🟢 O(1) | Constant | 1 | 1 | 1 | ✅ Perfect |
+| 🔵 O(log n) | Logarithmic | 3 | 10 | 20 | ✅ Excellent |
+| 🟡 O(n) | Linear | 10 | 1,000 | 1,000,000 | ⚡ Good |
+| 🟠 O(n log n) | Linearithmic | 33 | 10,000 | 20,000,000 | ⚠️ Acceptable |
+| 🔴 O(n²) | Quadratic | 100 | 1,000,000 | 1,000,000,000,000 | 💀 Terrible |
 
 > **Key Insight**: At n = 1,000,000 items, an O(n²) algorithm does **1 TRILLION** operations. An O(n) algorithm does just **1 million**. That's a **1,000,000x** difference!
 

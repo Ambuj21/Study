@@ -116,7 +116,7 @@ graph LR
 - [x] 1.1 Data Structures & When to Use Them
 - [x] 1.2 Algorithm Thinking & Big-O Notation
 - [x] 1.3 How the Internet Actually Works
-- [ ] 1.4 Database Fundamentals
+- [x] 1.4 Database Fundamentals
 - [ ] 1.5 Python Deep Dive
 
 ### Phase 2: System Design
