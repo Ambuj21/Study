@@ -120,7 +120,34 @@ graph LR
 - [x] 1.5 Python Deep Dive
 
 ### Phase 2: System Design
-- [ ] 2.1 – 2.10 (10 topics)
+
+**Stage 1 — Foundation**
+- [x] 2.1 What Is System Design & Why It Matters
+- [x] 2.2 Scalability — Vertical vs Horizontal
+- [ ] 2.3 CAP Theorem & Trade-offs
+- [ ] 2.4 Latency, Throughput & Estimation
+
+**Stage 2 — Core Building Blocks**
+- [ ] 2.5 DNS & Content Delivery Networks (CDN)
+- [ ] 2.6 Load Balancers — Distributing Traffic
+- [ ] 2.7 Caching — The Speed Layer
+- [ ] 2.8 Databases Deep Dive — SQL & NoSQL
+- [ ] 2.9 Database Replication
+- [ ] 2.10 Database Sharding & Partitioning
+- [ ] 2.11 Message Queues & Async Processing
+- [ ] 2.12 API Design & Protocols
+
+**Stage 3 — Advanced Patterns**
+- [ ] 2.13 Microservices Architecture
+- [ ] 2.14 Consistent Hashing Deep Dive
+- [ ] 2.15 Distributed Systems Fundamentals
+- [ ] 2.16 Observability & Reliability
+- [ ] 2.17 Security & Authentication at Scale
+
+**Stage 4 — Real-World Design Problems**
+- [ ] 2.18 Design a URL Shortener (bit.ly)
+- [ ] 2.19 Design a Chat System (WhatsApp)
+- [ ] 2.20 Design a Rate Limiter
 
 ### Phase 3: Python Backend
 - [ ] 3.1 – 3.10 (10 topics)
