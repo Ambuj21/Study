@@ -124,7 +124,7 @@ graph LR
 **Stage 1 — Foundation**
 - [x] 2.1 What Is System Design & Why It Matters
 - [x] 2.2 Scalability — Vertical vs Horizontal
-- [ ] 2.3 CAP Theorem & Trade-offs
+- [x] 2.3 CAP Theorem & Trade-offs
 - [ ] 2.4 Latency, Throughput & Estimation
 
 **Stage 2 — Core Building Blocks**
