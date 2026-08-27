@@ -125,7 +125,7 @@ graph LR
 - [x] 2.1 What Is System Design & Why It Matters
 - [x] 2.2 Scalability — Vertical vs Horizontal
 - [x] 2.3 CAP Theorem & Trade-offs
-- [ ] 2.4 Latency, Throughput & Estimation
+- [x] 2.4 Latency, Throughput & Estimation
 
 **Stage 2 — Core Building Blocks**
 - [ ] 2.5 DNS & Content Delivery Networks (CDN)
