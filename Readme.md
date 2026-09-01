@@ -128,7 +128,7 @@ graph LR
 - [x] 2.4 Latency, Throughput & Estimation
 
 **Stage 2 — Core Building Blocks**
-- [ ] 2.5 DNS & Content Delivery Networks (CDN)
+- [x] 2.5 DNS & Content Delivery Networks (CDN)
 - [ ] 2.6 Load Balancers — Distributing Traffic
 - [ ] 2.7 Caching — The Speed Layer
 - [ ] 2.8 Databases Deep Dive — SQL & NoSQL
