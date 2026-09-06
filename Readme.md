@@ -129,7 +129,7 @@ graph LR
 
 **Stage 2 — Core Building Blocks**
 - [x] 2.5 DNS & Content Delivery Networks (CDN)
-- [ ] 2.6 Load Balancers — Distributing Traffic
+- [x] 2.6 Load Balancers — Distributing Traffic
 - [ ] 2.7 Caching — The Speed Layer
 - [ ] 2.8 Databases Deep Dive — SQL & NoSQL
 - [ ] 2.9 Database Replication
