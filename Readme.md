@@ -132,7 +132,7 @@ graph LR
 - [x] 2.6 Load Balancers — Distributing Traffic
 - [x] 2.7 Caching — The Speed Layer
 - [x] 2.8 Databases Deep Dive — SQL & NoSQL
-- [ ] 2.9 Database Replication
+- [x] 2.9 Database Replication
 - [ ] 2.10 Database Sharding & Partitioning
 - [ ] 2.11 Message Queues & Async Processing
 - [ ] 2.12 API Design & Protocols
