@@ -135,7 +135,7 @@ graph LR
 - [x] 2.9 Database Replication
 - [x] 2.10 Database Sharding & Partitioning
 - [x] 2.11 Message Queues & Async Processing
-- [ ] 2.12 API Design & Protocols
+- [x] 2.12 API Design & Protocols
 
 **Stage 3 — Advanced Patterns**
 - [ ] 2.13 Microservices Architecture
